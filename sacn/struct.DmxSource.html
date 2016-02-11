@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `DmxSource` struct in crate `sacn`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, DmxSource">
+
+    <title>sacn::DmxSource - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>sacn</a></p><script>window.sidebarCurrent = {name: 'DmxSource', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>sacn</a>::<wbr><a class='struct' href=''>DmxSource</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-23' class='srclink' href='../src/sacn/source.rs.html#45-52' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct DmxSource {
+    // some fields omitted
+}</pre><div class='docblock'><p>A DMX over sACN sender.</p>
+
+<p>DmxSource is used for sending sACN packets over ethernet.</p>
+
+<p>Each universe will be sent to a dedicated multicast address
+&quot;239.255.{universe_high_byte}.{universe_low_byte}&quot;.</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>sacn</span>::<span class='ident'>DmxSource</span>;
+
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>dmx_source</span> <span class='op'>=</span> <span class='ident'>DmxSource</span>::<span class='ident'>new</span>(<span class='string'>&quot;Controller&quot;</span>).<span class='ident'>unwrap</span>();
+
+<span class='ident'>dmx_source</span>.<span class='ident'>send</span>(<span class='number'>1</span>, <span class='kw-2'>&amp;</span>[<span class='number'>100</span>, <span class='number'>100</span>, <span class='number'>100</span>, <span class='number'>100</span>, <span class='number'>100</span>, <span class='number'>100</span>]);
+<span class='ident'>dmx_source</span>.<span class='ident'>terminate_stream</span>(<span class='number'>1</span>);</pre>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../sacn/struct.DmxSource.html' title='sacn::DmxSource'>DmxSource</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='struct' href='../sacn/struct.DmxSource.html' title='sacn::DmxSource'>DmxSource</a>&gt;</code></h4>
+<div class='docblock'><p>Constructs a new DmxSource with DMX START code set to 0.</p>
+</div><h4 id='method.with_cid' class='method'><code>fn <a href='#method.with_cid' class='fnname'>with_cid</a>(name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, cid: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 16]</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='struct' href='../sacn/struct.DmxSource.html' title='sacn::DmxSource'>DmxSource</a>&gt;</code></h4>
+<div class='docblock'><p>Constructs a new DmxSource with DMX START code set to 0 with specified CID.</p>
+</div><h4 id='method.send' class='method'><code>fn <a href='#method.send' class='fnname'>send</a>(&amp;self, universe: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, data: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Sends DMX data to specified universe.</p>
+</div><h4 id='method.send_with_priority' class='method'><code>fn <a href='#method.send_with_priority' class='fnname'>send_with_priority</a>(&amp;self, universe: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, data: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, priority: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Sends DMX data to specified universe with specified priority.</p>
+</div><h4 id='method.terminate_stream' class='method'><code>fn <a href='#method.terminate_stream' class='fnname'>terminate_stream</a>(&amp;self, universe: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Terminates a universe stream.</p>
+
+<p>Terminates a stream to a specified universe by sending three packages with
+Stream_Terminated flag set to 1.</p>
+</div><h4 id='method.cid' class='method'><code>fn <a href='#method.cid' class='fnname'>cid</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 16]</a></code></h4>
+<div class='docblock'><p>Returns the ACN CID device identifier of the DmxSource.</p>
+</div><h4 id='method.set_cid' class='method'><code>fn <a href='#method.set_cid' class='fnname'>set_cid</a>(&amp;mut self, cid: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 16]</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Sets the ACN CID device identifier.</p>
+</div><h4 id='method.name' class='method'><code>fn <a href='#method.name' class='fnname'>name</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+<div class='docblock'><p>Returns the ACN source name.</p>
+</div><h4 id='method.set_name' class='method'><code>fn <a href='#method.set_name' class='fnname'>set_name</a>(&amp;mut self, name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+<div class='docblock'><p>Sets ACN source name.</p>
+</div><h4 id='method.preview_mode' class='method'><code>fn <a href='#method.preview_mode' class='fnname'>preview_mode</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Returns if DmxSource is in preview mode.</p>
+</div><h4 id='method.set_preview_mode' class='method'><code>fn <a href='#method.set_preview_mode' class='fnname'>set_preview_mode</a>(&amp;mut self, preview_mode: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
+<div class='docblock'><p>Sets the DmxSource to preview mode.</p>
+
+<p>All packets will be sent with Preview_Data flag set to 1.</p>
+</div><h4 id='method.start_code' class='method'><code>fn <a href='#method.start_code' class='fnname'>start_code</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
+<div class='docblock'><p>Returns the current DMX START code.</p>
+</div><h4 id='method.set_start_code' class='method'><code>fn <a href='#method.set_start_code' class='fnname'>set_start_code</a>(&amp;mut self, start_code: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>)</code></h4>
+<div class='docblock'><p>Sets the DMX START code.</p>
+</div><h4 id='method.set_multicast_ttl' class='method'><code>fn <a href='#method.set_multicast_ttl' class='fnname'>set_multicast_ttl</a>(&amp;self, multicast_ttl: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Sets the multicast time to live.</p>
+</div><h4 id='method.multicast_ttl' class='method'><code>fn <a href='#method.multicast_ttl' class='fnname'>multicast_ttl</a>(&amp;self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>&gt;</code></h4>
+<div class='docblock'><p>Returns the multicast time to live of the socket.</p>
+</div><h4 id='method.set_multicast_loop' class='method'><code>fn <a href='#method.set_multicast_loop' class='fnname'>set_multicast_loop</a>(&amp;self, multicast_loop: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Sets if multicast loop is enabled.</p>
+</div><h4 id='method.multicast_loop' class='method'><code>fn <a href='#method.multicast_loop' class='fnname'>multicast_loop</a>(&amp;self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>&gt;</code></h4>
+<div class='docblock'><p>Returns if multicast loop of the socket is enabled.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../sacn/struct.DmxSource.html' title='sacn::DmxSource'>DmxSource</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "sacn";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>
